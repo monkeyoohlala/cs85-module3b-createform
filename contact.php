@@ -60,12 +60,12 @@
 
                 //Validate name
                 if (empty($originalName)) {
-                    $name_error = "Please enter your full name. <br>";
-                    echo $name_error;
+                    $fullname_error = "Please enter your full name. <br>";
+                    echo $fullname_error;
                     $validation_passed = FALSE;
                 } else if (strlen($originalName) < 2) {
-                    $name_error = "Name must be at least 2 characters long. <br>";
-                    echo $name_error;
+                    $fullname_error = "Name must be at least 2 characters long. <br>";
+                    echo $fullname_error;
                     $validation_passed = FALSE;
                 }
 
@@ -91,15 +91,15 @@
                     echo $message_error;
                     $validation_passed = FALSE;
                 } 
-                // else if (strlen($originalMessage) < 50) {
-                //     $message_error = "Message length is too short";
-                //     echo $message_error;
-                //     $validation_passed = FALSE;
-                // } else if (strlen($originalMessage) > 150) {
-                //     $message_error = "Message length is too long";
-                //     echo $message_error;
-                //     $validation_passed = FALSE;
-                // }
+                else if (strlen($originalMessage) < 50) {
+                    $message_error = "Message length is too short";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                } else if (strlen($originalMessage) > 150) {
+                    $message_error = "Message length is too long";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                }
 
                 if ($validation_passed == TRUE) {
                     
@@ -116,8 +116,14 @@
             }
 
 
-        ?>
+            /* 
+                My reflections:
+                I had a problem with using localhost. I kept typing in localhost.com instead of plain localhost. This error kept me guessing what the problem was for hours. I tried to debug everything but it turned out that I just needed to exclude the .com extension from the URL address.
+            */
 
+        ?>
+            
     </body>
 
 </html>
+
