@@ -38,8 +38,12 @@
                 if (empty($originalName)) {
                     $fullname_error = "Please enter your full name. <br>";
                     echo $fullname_error;
+                    $fullname_error = "Please enter your full name. <br>";
+                    echo $fullname_error;
                     $validation_passed = FALSE;
                 } else if (strlen($originalName) < 2) {
+                    $fullname_error = "Name must be at least 2 characters long. <br>";
+                    echo $fullname_error;
                     $fullname_error = "Name must be at least 2 characters long. <br>";
                     echo $fullname_error;
                     $validation_passed = FALSE;
@@ -67,6 +71,15 @@
                     echo $message_error;
                     $validation_passed = FALSE;
                 } 
+                else if (strlen($originalMessage) < 50) {
+                    $message_error = "Message length is too short";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                } else if (strlen($originalMessage) > 150) {
+                    $message_error = "Message length is too long";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                }
                 else if (strlen($originalMessage) < 50) {
                     $message_error = "Message length is too short. <br>";
                     echo $message_error;
@@ -127,4 +140,6 @@
     </body>
 
 </html>
+
+
 
