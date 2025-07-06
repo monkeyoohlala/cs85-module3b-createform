@@ -19,30 +19,6 @@
 
     <body>
         <div class="myForm">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <label for="fullname">Full Name: </label>
-                <br>
-                <input type="text" id="fullname" name="fullname" placeholder="Full Name" value="">
-                <br><br>
-
-                <label for="email">Email: </label>
-                <br>
-                <input type="email" id="email" name="email" placeholder="name@example.com" value="">
-                <br><br>
-
-                <label for="topic">To Whom You Love The Most: </label>
-                <br>
-                <input type="text" id="topic" name="topic" placeholder="Mom" value="">
-                <br><br>
-
-                <label for="message">Write something in here:</label>
-                <br>
-                <textarea name="message" id="message" cols="30" rows="10" placeholder="I love you... so much"></textarea>
-                <br><br>
-                <input type="reset" value="Clear Form" />&nbsp; &nbsp;
-                <button type="submit" name="submit" value="submit">Send Data</button>
-            </form>
-        </div>
 
         <?php 
 
@@ -60,12 +36,12 @@
 
                 //Validate name
                 if (empty($originalName)) {
-                    $name_error = "Please enter your full name. <br>";
-                    echo $name_error;
+                    $fullname_error = "Please enter your full name. <br>";
+                    echo $fullname_error;
                     $validation_passed = FALSE;
                 } else if (strlen($originalName) < 2) {
-                    $name_error = "Name must be at least 2 characters long. <br>";
-                    echo $name_error;
+                    $fullname_error = "Name must be at least 2 characters long. <br>";
+                    echo $fullname_error;
                     $validation_passed = FALSE;
                 }
 
@@ -91,15 +67,15 @@
                     echo $message_error;
                     $validation_passed = FALSE;
                 } 
-                // else if (strlen($originalMessage) < 50) {
-                //     $message_error = "Message length is too short";
-                //     echo $message_error;
-                //     $validation_passed = FALSE;
-                // } else if (strlen($originalMessage) > 150) {
-                //     $message_error = "Message length is too long";
-                //     echo $message_error;
-                //     $validation_passed = FALSE;
-                // }
+                else if (strlen($originalMessage) < 50) {
+                    $message_error = "Message length is too short. <br>";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                } else if (strlen($originalMessage) > 150) {
+                    $message_error = "Message length is too long. <br>";
+                    echo $message_error;
+                    $validation_passed = FALSE;
+                }
 
                 if ($validation_passed == TRUE) {
                     
@@ -114,10 +90,41 @@
                 }
 
             }
-
-
         ?>
 
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <label for="fullname"><br><br><br>Full Name: </label>
+                <br>
+                <input type="text" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo htmlspecialchars($originalName ?? '', ENT_QUOTES);?>">
+                <br><br>
+
+                <label for="email">Email: </label>
+                <br>
+                <input type="email" id="email" name="email" placeholder="name@example.com" value="<?php echo htmlspecialchars($originalEmail ?? '', ENT_QUOTES);?>">
+                <br><br>
+
+                <label for="topic">To Whom You Love The Most: </label>
+                <br>
+                <input type="text" id="topic" name="topic" placeholder="Mom" value="<?php echo htmlspecialchars($originalTopic ?? '', ENT_QUOTES);?>">
+                <br><br>
+
+                <label for="message">Write something in here:</label>
+                <br>
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="I love you... so much"><?php echo htmlspecialchars($originalMessage ?? '', ENT_QUOTES); ?></textarea>
+                <br><br>
+                <input type="reset" value="Clear Form" />&nbsp; &nbsp;
+                <button type="submit" name="submit" value="submit">Send Data</button>
+            </form>
+        </div>
+
+        
+            <!-- 
+                My reflections:
+                I had a problem with using localhost. I kept typing in localhost.com instead of plain localhost. This error kept me guessing what the problem was for hours. I tried to debug everything but it turned out that I just needed to exclude the .com extension from the URL address.
+             -->
+                
+            
     </body>
 
 </html>
+
